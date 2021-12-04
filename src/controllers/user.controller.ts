@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import UserModel from "../models/User.model";
 import { compare, genSalt, hash } from "bcrypt";
 import * as EmailValidator from "email-validator";
+import { sign, verify } from "jsonwebtoken";
 
 interface UserRegistration {
   email: string;
@@ -37,16 +38,23 @@ export default class UserController {
 
       if (!isPasswordValid) {
         return res.status(400).json({
-					message: "Invalid email or password",
-				})
+          message: "Invalid email or password",
+        });
       }
+
+      //TODO: Generate JWT token
+      // TODO: TOTP for 2FA
+
+      // JWT
+      const payload = {
+        id: userExists._id,
+        email: userExists.email,
+      };
+      const token = sign(payload, );
 
       return res.status(200).json({
         message: "User logged in successfully",
-        user: {
-          id: userExists._id,
-          email: userExists.email,
-        },
+        user: payload,
       });
     } catch (error) {
       res.status(500).json(error);
@@ -96,6 +104,15 @@ export default class UserController {
           updated_at: newUser.updated_at,
         },
       });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+
+  public async totp_register(req: Request, res: Response, next: NextFunction) {
+    // TODO: Implement TOTP
+
+    try {
     } catch (error) {
       res.status(500).json(error);
     }
