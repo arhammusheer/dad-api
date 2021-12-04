@@ -1,7 +1,8 @@
 import { Router } from "express";
-import dashboardRoutes from "./dashboard";
-import apiRoutes from "./api";
-import authRoutes from "./auth";
+
+import dashboardRoutes from "./dashboard.routes";
+import apiRoutes from "./api.routes";
+import authRoutes from "./auth.routes";
 
 const routes = Router();
 
