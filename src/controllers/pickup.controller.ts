@@ -1,17 +1,41 @@
 import { Request, Response, NextFunction } from "express";
-import ContentModel from "../models/Content";
+import ContentModel from "../models/Content.model";
 
-export default class ApiController {
-  public index(req: Request, res: Response, next: NextFunction) {
+export default class PickupController {
+  public async random(req: Request, res: Response, next: NextFunction) {
+    // TODO: Implement pagination
+    const count = parseInt(req.query.count as string) || 1;
+
+    if (count > 10) {
+      return res.status(400).json({
+        message:
+          "Count must be less than 10. You can always upgrade your plan.",
+      });
+    }
+
+    const pickup = await ContentModel.aggregate([
+      { $match: { type: "pickup" } },
+      { $sample: { size: count } },
+    ]);
     res.json({
-      message: "Hello World!",
+      pickup,
     });
   }
 
-  public async random(req: Request, res: Response, next: NextFunction) {
-    ContentModel.aggregate([{$match:{type:"pickup"}}, { $sample: { size: 1 } }]);
-    res.json({
-      message: "Hello World!",
-    });
+  public async create(req: Request, res: Response, next: NextFunction) {
+    try {
+      const pickup = await ContentModel.create({
+        type: "pickup",
+        content: req.body.joke,
+      });
+
+      res.json(pickup);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+        message: "Duplicate key found",
+      });
+    }
   }
 }

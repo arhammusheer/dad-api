@@ -15,6 +15,7 @@ const ContentSchema = new Schema<Content>({
   content: {
     type: String,
     required: true,
+    unique: true,
   },
   date_created: {
     type: Date,
