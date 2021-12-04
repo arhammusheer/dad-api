@@ -1,4 +1,4 @@
-import { Document, Schema } from "mongoose";
+import { Document, model, Schema } from "mongoose";
 
 interface Content extends Document {
   type: string;
@@ -7,7 +7,7 @@ interface Content extends Document {
   date_updated: Date;
 }
 
-const JokeSchema = new Schema<Content>({
+const ContentSchema = new Schema<Content>({
   type: {
     type: String,
     required: true,
@@ -25,3 +25,7 @@ const JokeSchema = new Schema<Content>({
     default: new Date(Date.now()),
   },
 });
+
+const ContentModel = model<Content>("Content", ContentSchema);
+
+export default ContentModel;

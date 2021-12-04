@@ -1,7 +1,12 @@
 import express from "express";
 import { connect } from "mongoose";
 
+import helmet from "helmet";
+import morgan from "morgan";
+
 import * as dotenv from "dotenv";
+
+import routes from "./routes";
 
 dotenv.config();
 
@@ -15,6 +20,11 @@ async function connectToDB() {
 }
 
 connectToDB();
+
+app.use(helmet());
+app.use(morgan("dev"));
+
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

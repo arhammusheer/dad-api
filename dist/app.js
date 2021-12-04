@@ -33,7 +33,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = require("mongoose");
+const helmet_1 = __importDefault(require("helmet"));
+const morgan_1 = __importDefault(require("morgan"));
 const dotenv = __importStar(require("dotenv"));
+const routes_1 = __importDefault(require("./routes"));
 dotenv.config();
 const app = express_1.default();
 const PORT = process.env.PORT || "3000";
@@ -45,6 +48,9 @@ function connectToDB() {
     });
 }
 connectToDB();
+app.use(helmet_1.default());
+app.use(morgan_1.default("dev"));
+app.use(routes_1.default);
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });

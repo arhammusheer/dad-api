@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/routers/index.ts"],"names":[],"mappings":""}
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/routers/index.ts"],"names":[],"mappings":";;AAEA,kBAAe,CAAC,MAAc,EAAE,EAAE;IAChC,MAAM,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE;QAC3B,GAAG,CAAC,IAAI,CAAC,EAAE,CAAC,CAAC;IACf,CAAC,CAAC,CAAC;AACL,CAAC,CAAC"}
