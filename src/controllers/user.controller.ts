@@ -60,10 +60,16 @@ export default class UserController {
       };
       const token = sign(payload, PRIVATE_KEY, { algorithm: "RS256" });
 
+      res.cookie("token", token, {
+        signed: true,
+        secure: true,
+        httpOnly: true,
+        sameSite: "strict",
+      });
+
       return res.status(200).json({
         message: "User logged in successfully",
         user: payload.user,
-        token,
       });
     } catch (error) {
       res.status(500).json(error);
@@ -112,6 +118,13 @@ export default class UserController {
       };
       const token = sign(payload, PRIVATE_KEY, { algorithm: "RS256" });
 
+      res.cookie("token", token, {
+        signed: true,
+        secure: true,
+        httpOnly: true,
+        sameSite: "strict",
+      });
+
       return res.status(201).json({
         message: "User created successfully",
         user: {
@@ -120,7 +133,6 @@ export default class UserController {
           created_at: newUser.created_at,
           updated_at: newUser.updated_at,
         },
-        token,
       });
     } catch (error) {
       res.status(500).json(error);
@@ -130,7 +142,8 @@ export default class UserController {
   public async totp_register(req: Request, res: Response, next: NextFunction) {
     // TODO: Implement TOTP
     try {
-      const token_valid = await verify(req.body.token, PUBLIC_KEY);
+      const token_valid = await verify(req.signedCookies.token, PUBLIC_KEY);
+      console.log(req.signedCookies);
       if (!token_valid) {
         return res.status(400).json({
           message: "Invalid token",
