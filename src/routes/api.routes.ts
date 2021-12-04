@@ -13,5 +13,3 @@ router.get("/pickup", pickupController.random);
 router.post("/pickup", pickupController.create);
 
 export default router;
-
-

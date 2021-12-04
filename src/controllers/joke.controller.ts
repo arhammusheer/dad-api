@@ -2,14 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import ContentModel from "../models/Content.model";
 
 export default class JokeController {
-
-  public async random(req: Request, res: Response, next: NextFunction) { 
+  public async random(req: Request, res: Response, next: NextFunction) {
     // TODO: Implement pagination
     const count = parseInt(req.query.count as string) || 1;
 
     if (count > 10) {
       return res.status(400).json({
-        message: "Count must be less than 10. You can always upgrade your plan.",
+        message:
+          "Count must be less than 10. You can always upgrade your plan.",
       });
     }
 
@@ -21,7 +21,6 @@ export default class JokeController {
       joke,
     });
   }
-  
 
   public async create(req: Request, res: Response, next: NextFunction) {
     try {

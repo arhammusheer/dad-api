@@ -3,6 +3,7 @@ import { connect } from "mongoose";
 
 import helmet from "helmet";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 
 import * as dotenv from "dotenv";
 
@@ -23,7 +24,8 @@ connectToDB();
 
 app.use(helmet());
 app.use(morgan("dev"));
-app.use(express.json({limit: "10mb"}));
+app.use(express.json({ limit: "10mb" }));
+app.use(cookieParser());
 
 app.use(routes);
 

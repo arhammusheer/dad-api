@@ -3,11 +3,17 @@ import UserModel from "../models/User.model";
 import { compare, genSalt, hash } from "bcrypt";
 import * as EmailValidator from "email-validator";
 import { sign, verify } from "jsonwebtoken";
+import { readFileSync } from "fs";
+import { resolve } from "path";
 
 interface UserRegistration {
   email: string;
   password: string;
+  totp_verified?: boolean;
 }
+
+const PRIVATE_KEY = readFileSync(resolve(__dirname, "../../keys/private.key"));
+const PUBLIC_KEY = readFileSync(resolve(__dirname, "../../keys/public.key"));
 
 export default class UserController {
   public async login(req: Request, res: Response, next: NextFunction) {
@@ -42,19 +48,22 @@ export default class UserController {
         });
       }
 
-      //TODO: Generate JWT token
       // TODO: TOTP for 2FA
 
       // JWT
       const payload = {
-        id: userExists._id,
-        email: userExists.email,
+        user: {
+          id: userExists._id,
+          email: userExists.email,
+        },
+        _2fa: false,
       };
-      const token = sign(payload, );
+      const token = sign(payload, PRIVATE_KEY, { algorithm: "RS256" });
 
       return res.status(200).json({
         message: "User logged in successfully",
-        user: payload,
+        user: payload.user,
+        token,
       });
     } catch (error) {
       res.status(500).json(error);
@@ -95,6 +104,14 @@ export default class UserController {
         email: user.email,
         password_hash: hashedPassword,
       });
+
+      // JWT
+      const payload = {
+        id: newUser._id,
+        email: newUser.email,
+      };
+      const token = sign(payload, PRIVATE_KEY, { algorithm: "RS256" });
+
       return res.status(201).json({
         message: "User created successfully",
         user: {
@@ -103,6 +120,7 @@ export default class UserController {
           created_at: newUser.created_at,
           updated_at: newUser.updated_at,
         },
+        token,
       });
     } catch (error) {
       res.status(500).json(error);
@@ -111,8 +129,13 @@ export default class UserController {
 
   public async totp_register(req: Request, res: Response, next: NextFunction) {
     // TODO: Implement TOTP
-
     try {
+      const token_valid = await verify(req.body.token, PUBLIC_KEY);
+      if (!token_valid) {
+        return res.status(400).json({
+          message: "Invalid token",
+        });
+      }
     } catch (error) {
       res.status(500).json(error);
     }

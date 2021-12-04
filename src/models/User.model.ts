@@ -8,6 +8,7 @@ interface User extends Document {
   totp_secret: string;
   totp_enabled: boolean;
   totp_verified: boolean;
+  email_verified: boolean;
 }
 
 const UserSchema = new Schema<User>({
@@ -38,6 +39,11 @@ const UserSchema = new Schema<User>({
     default: false,
   },
   totp_verified: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  email_verified: {
     type: Boolean,
     required: false,
     default: false,
