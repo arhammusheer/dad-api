@@ -79,26 +79,27 @@ export default class UserController {
   public async register(req: Request, res: Response, next: NextFunction) {
     try {
       const user = req.body as UserRegistration;
+
       if (!user.email || !user.password) {
         return res.status(400).json({
           message: "Email and password are required",
         });
       }
 
+
       EmailValidator.validate(user.email)
         ? null
         : res.status(400).json({
             message: "Please enter a valid email",
           });
-
       const userExists = await UserModel.findOne({
-        where: {
+        
           email: user.email,
-        },
+        
       });
-
+      
       if (userExists) {
-        return res.status(400).json({
+        return res.status(409).json({
           message: "User already exists",
         });
       }
@@ -119,10 +120,10 @@ export default class UserController {
       const token = sign(payload, PRIVATE_KEY, { algorithm: "RS256" });
 
       res.cookie("token", token, {
-        signed: true,
-        secure: true,
+        // signed: true,
+        // secure: true,
         httpOnly: true,
-        sameSite: "strict",
+        // sameSite: "strict",
       });
 
       return res.status(201).json({

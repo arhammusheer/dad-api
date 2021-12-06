@@ -23,6 +23,11 @@ export default class PickupController {
   }
 
   public async create(req: Request, res: Response, next: NextFunction) {
+    if (req.headers.authorization !== process.env.API_KEY) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
     try {
       const pickup = await ContentModel.create({
         type: "pickup",

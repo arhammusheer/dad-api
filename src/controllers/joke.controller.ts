@@ -23,6 +23,11 @@ export default class JokeController {
   }
 
   public async create(req: Request, res: Response, next: NextFunction) {
+    if (req.headers.authorization !== process.env.API_KEY) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
     try {
       const joke = await ContentModel.create({
         type: "joke",

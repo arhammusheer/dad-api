@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/arhammusheer/dad-api#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "tslint": "^6.1.3",
     "typescript": "^4.5.2"
