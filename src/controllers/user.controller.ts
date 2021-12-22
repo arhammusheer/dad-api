@@ -154,4 +154,15 @@ export default class UserController {
       res.status(500).json(error);
     }
   }
+
+  public async logout(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.clearCookie("token");
+      return res.status(200).json({
+        message: "User logged out successfully",
+      });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 }
