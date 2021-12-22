@@ -6,7 +6,6 @@ const router = Router();
 
 const pickupController = new PickupController();
 const jokeController = new JokeController();
-const musicController = new MusicController();
 
 router.get("/joke", jokeController.random);
 router.post("/joke", jokeController.create);
