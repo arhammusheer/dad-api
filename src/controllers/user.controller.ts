@@ -56,7 +56,7 @@ export default class UserController {
         },
         _2fa: false,
       };
-      const token = sign(payload, PRIVATE_KEY, { algorithm: 'RS256' });
+      const token = sign(payload, PRIVATE_KEY, { algorithm: "RS256" });
       console.log(token);
       res.cookie("token", token, {
         signed: true,
@@ -66,7 +66,7 @@ export default class UserController {
       });
 
       return res.status(200).json({
-        token: token,
+        token,
         message: "User logged in successfully",
         user: payload.user,
       });
@@ -85,18 +85,15 @@ export default class UserController {
         });
       }
 
-
-      EmailValidator.validate(user.email)
-        ? null
-        : res.status(400).json({
-            message: "Please enter a valid email",
-          });
+      if (!EmailValidator.validate(user.email)) {
+        return res.status(400).json({
+          message: "Please enter a valid email",
+        });
+      }
       const userExists = await UserModel.findOne({
-        
-          email: user.email,
-        
+        email: user.email,
       });
-      
+
       if (userExists) {
         return res.status(409).json({
           message: "User already exists",
@@ -142,9 +139,9 @@ export default class UserController {
   public async totp_register(req: Request, res: Response, next: NextFunction) {
     // TODO: Implement TOTP
     try {
-      const token_valid = await verify(req.signedCookies.token, PUBLIC_KEY);
+      const tokenValid = await verify(req.signedCookies.token, PUBLIC_KEY);
       console.log(req.signedCookies);
-      if (!token_valid) {
+      if (!tokenValid) {
         return res.status(400).json({
           message: "Invalid token",
         });

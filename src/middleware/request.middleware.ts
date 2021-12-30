@@ -8,7 +8,7 @@ export default async function RequestHandler(req: Request, res: Response, next: 
     const userAgent = req.headers['user-agent'];
     if(!res.statusCode){
         res.status(404).json({
-            message: "Not found",   
+            message: "Not found",
         });
     }
     const request = new RequestModel({
@@ -23,8 +23,5 @@ export default async function RequestHandler(req: Request, res: Response, next: 
         method: req.method,
         status: res.statusCode,
     });
-    if(!res.statusCode) {
-        
-    }
     await request.save();
 }
