@@ -1,4 +1,4 @@
-import { Document, model, Number, Schema } from "mongoose";
+import { Document, model, Schema } from "mongoose";
 
 interface Request extends Document {
   user_id: string;

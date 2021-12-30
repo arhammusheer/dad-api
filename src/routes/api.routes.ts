@@ -15,13 +15,6 @@ router.post("/joke", jokeController.create);
 router.get("/pickup", pickupController.random);
 router.post("/pickup", pickupController.create);
 
-router.all("*",(req: Request, res: Response, next: NextFunction) => {
-    res.status(404).json({
-        message: "Not found",   
-    });
-    next();
-});
-
 router.use(RequestHandler);
 
 export default router;
