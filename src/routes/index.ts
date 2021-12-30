@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import cors from "cors";
 
-import dashboardRoutes from "./dashboard.routes";
 import apiRoutes from "./api.routes";
 import authRoutes from "./auth.routes";
 
@@ -16,7 +15,6 @@ routes.use((req: Request, res: Response, next: NextFunction) => {
 	next();
 })
 
-routes.use("/", dashboardRoutes);
 routes.use("/api", apiRoutes);
 routes.use("/auth", authRoutes);
 

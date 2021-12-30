@@ -62,7 +62,7 @@ export default class UserController {
 
       res.cookie("token", token, {
         signed: true,
-        secure: true,
+        // secure: true,
         httpOnly: true,
         sameSite: "strict",
       });
