@@ -24,11 +24,9 @@ export default class UserController {
           message: "Email and password are required",
         });
       }
-
+      // console.log(user);
       const userExists = await UserModel.findOne({
-        where: {
-          email: user.email,
-        },
+        email: user.email,
       });
 
       if (!userExists) {
