@@ -1,4 +1,4 @@
-import { Document, model, Schema } from "mongoose";
+import { Document, model, Number, Schema } from "mongoose";
 
 interface Request extends Document {
 	user_id: string;
@@ -8,6 +8,9 @@ interface Request extends Document {
 		user_agent: string;
 	}
 	transaction_id: string;
+	url: string;
+	method: string;
+	status: number;
 }
 
 const RequestSchema = new Schema<Request>({
@@ -32,6 +35,19 @@ const RequestSchema = new Schema<Request>({
 	},
 	transaction_id: {
 		type: String,
+	},
+	url: {
+		type: String,
+		required: true,
+	},
+	method: {
+		type: String,
+		required: true,
+	},
+	status: {
+		type: Number,
+		required: true,
+		default: 200,
 	}
 });
 
