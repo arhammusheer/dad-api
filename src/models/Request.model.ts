@@ -10,6 +10,7 @@ interface Request extends Document {
 	transaction_id: string;
 	url: string;
 	method: string;
+	status: number;
 }
 
 const RequestSchema = new Schema<Request>({
@@ -41,6 +42,10 @@ const RequestSchema = new Schema<Request>({
 	},
 	method: {
 		type: String,
+		required: true,
+	},
+	status: {
+		type: Number,
 		required: true,
 	},
 });

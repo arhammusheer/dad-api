@@ -15,7 +15,10 @@ export default async function RequestHandler(req: Request, res: Response, next: 
         transaction_id: req.body.transaction_id || null,
         url: req.originalUrl,
         method: req.method,
+        status: res.statusCode,
     });
+    if(!res.statusCode) {
+        
+    }
     await request.save();
-    next();
 }

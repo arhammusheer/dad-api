@@ -58,8 +58,8 @@ export default class UserController {
         },
         _2fa: false,
       };
-      const token = sign(payload, PRIVATE_KEY, { algorithm: "RS256" });
-
+      const token = sign(payload, PRIVATE_KEY, { algorithm: 'RS256' });
+      console.log(token);
       res.cookie("token", token, {
         signed: true,
         // secure: true,
@@ -68,6 +68,7 @@ export default class UserController {
       });
 
       return res.status(200).json({
+        token: token,
         message: "User logged in successfully",
         user: payload.user,
       });

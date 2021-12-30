@@ -20,6 +20,7 @@ export default class JokeController {
     res.json({
       joke,
     });
+    next();
   }
 
   public async create(req: Request, res: Response, next: NextFunction) {
@@ -42,5 +43,6 @@ export default class JokeController {
         message: "Duplicate key found",
       });
     }
+    next();
   }
 }

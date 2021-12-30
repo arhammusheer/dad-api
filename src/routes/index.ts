@@ -3,6 +3,7 @@ import cors from "cors";
 
 import apiRoutes from "./api.routes";
 import authRoutes from "./auth.routes";
+import dashboardRoutes from "./dashboard.routes";
 
 const routes = Router();
 
@@ -17,5 +18,6 @@ routes.use((req: Request, res: Response, next: NextFunction) => {
 
 routes.use("/api", apiRoutes);
 routes.use("/auth", authRoutes);
+routes.use("/dashboard", dashboardRoutes);
 
 export default routes;

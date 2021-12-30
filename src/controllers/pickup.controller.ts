@@ -20,6 +20,7 @@ export default class PickupController {
     res.json({
       pickup,
     });
+    next();
   }
 
   public async create(req: Request, res: Response, next: NextFunction) {
@@ -42,5 +43,6 @@ export default class PickupController {
         message: "Duplicate key found",
       });
     }
+    next();
   }
 }
