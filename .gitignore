@@ -4,4 +4,4 @@ node_modules/**/*
 dist/**/*
 
 keys/**/*
-.DS_Store
+**/.DS_Store

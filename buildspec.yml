@@ -1,0 +1,24 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - npm i -g typescript
+      - echo "install nodejs"
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - tsc
+      - echo "build complete"
+  post_build:
+    commands:
+      - cp ./package.json dist/
+artifacts:
+  files:
+  ##this will take all files within the dist folder which will then be zipped by CodeBuild then stored in S3
+    - "**/*"
+  base-directory: "dist"
+   
