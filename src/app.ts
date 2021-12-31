@@ -12,7 +12,6 @@ import routes from "./routes";
 dotenv.config();
 
 const app = express();
-const PORT: string = process.env.PORT || "3000";
 
 async function connectToDB() {
   await connect(process.env.MONGO_URI).then(() => {
@@ -30,6 +29,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+export default app;
