@@ -11,14 +11,11 @@ phases:
       - npm install
   build:
     commands:
-      - tsc
+      - npm run build
       - echo "build complete"
-  post_build:
-    commands:
-      - cp ./package.json dist/
 artifacts:
   files:
   ##this will take all files within the dist folder which will then be zipped by CodeBuild then stored in S3
     - "**/*"
-  base-directory: "dist"
+  base-directory: "."
    
