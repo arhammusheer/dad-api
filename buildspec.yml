@@ -13,6 +13,11 @@ phases:
     commands:
       - npm run build
       - echo "build complete"
+  post_build:
+    commands:
+      - mkdir keys
+      - aws s3 cp --region=us-east-2 "s3://dashboard-keys/public.key" "keys/" 
+      - aws s3 cp --region=us-east-2 "s3://dashboard-keys/private.key" "keys/" 
 artifacts:
   files:
   ##this will take all files within the dist folder which will then be zipped by CodeBuild then stored in S3
