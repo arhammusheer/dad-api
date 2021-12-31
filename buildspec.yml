@@ -18,4 +18,5 @@ artifacts:
   ##this will take all files within the dist folder which will then be zipped by CodeBuild then stored in S3
     - "**/*"
   base-directory: "."
+  name: builds/build-$CODEBUILD_BUILD_NUMBER/dashboard-api-build
    
