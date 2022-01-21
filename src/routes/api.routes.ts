@@ -15,6 +15,6 @@ router.post("/joke", jokeController.create);
 router.get("/pickup", pickupController.random);
 router.post("/pickup", pickupController.create);
 
-router.use(RequestHandler);
+// router.use(RequestHandler);
 
 export default router;
