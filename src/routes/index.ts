@@ -16,6 +16,7 @@ routes.use((req: Request, res: Response, next: NextFunction) => {
 	next();
 })
 
+
 routes.use("/api", apiRoutes);
 // routes.use("/auth", authRoutes);
 // routes.use("/dashboard", dashboardRoutes);
