@@ -5,3 +5,4 @@ dist/**/*
 
 keys/**/*
 **/.DS_Store
+.serverless/**/*
