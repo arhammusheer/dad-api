@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dad Jokes and Pickup Lines</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+				flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .card {
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        transition: transform 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      p {
+        min-height: 22px;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="jokeCard">
+      <h2>Dad Joke</h2>
+      <button id="jokeBtn">Get Joke</button>
+      <p id="joke"></p>
+    </div>
+    <div class="card" id="pickupCard">
+      <h2>Pickup Line</h2>
+      <button id="pickupBtn">Get Line</button>
+      <p id="pickup"></p>
+    </div>
+    <script>
+      document.getElementById("jokeBtn").onclick = function () {
+        fetchJoke("https://dad.croissant.one/api/joke", "joke");
+      };
+
+      document.getElementById("pickupBtn").onclick = function () {
+        fetchJoke("https://dad.croissant.one/api/pickup", "pickup");
+      };
+
+      function fetchJoke(url, elementId) {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const elem = document.getElementById(elementId);
+            elem.style.opacity = "0";
+            setTimeout(() => {
+              elem.textContent = data[elementId][0].content;
+              elem.style.opacity = "1";
+            }, 300); // Wait for the fade out to finish before changing the text and fading back in
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
+</html>

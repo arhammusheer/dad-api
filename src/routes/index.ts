@@ -22,7 +22,8 @@ routes.use("/api", apiRoutes);
 // routes.use("/dashboard", dashboardRoutes);
 
 routes.get("/", (req: Request, res: Response) => {
-  res.send("Hello World");
+  // Serve HTML from ../tryout/index.html
+  res.sendFile("index.html", { root: "src/tryout" });
 });
 
 export default routes;
