@@ -15,7 +15,8 @@ routes.use("/api", api_routes_1.default);
 // routes.use("/auth", authRoutes);
 // routes.use("/dashboard", dashboardRoutes);
 routes.get("/", (req, res) => {
-    res.send("Hello World");
+    // Serve HTML from ../tryout/index.html
+    res.sendFile("index.html", { root: "src/tryout" });
 });
 exports.default = routes;
 //# sourceMappingURL=index.js.map
