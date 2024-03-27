@@ -18,5 +18,13 @@ routes.get("/", (req, res) => {
     // Serve HTML from ../tryout/index.html
     res.sendFile("index.html", { root: "src/tryout" });
 });
+routes.get("/style.css", (req, res) => {
+    // Serve HTML from ../tryout/index.html
+    res.sendFile("style.css", { root: "src/tryout" });
+});
+routes.get("/script.js", (req, res) => {
+    // Serve HTML from ../tryout/index.html
+    res.sendFile("script.js", { root: "src/tryout" });
+});
 exports.default = routes;
 //# sourceMappingURL=index.js.map
