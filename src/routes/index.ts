@@ -21,7 +21,7 @@ routes.use("/api", apiRoutes);
 // routes.use("/auth", authRoutes);
 // routes.use("/dashboard", dashboardRoutes);
 
-router.get("/", (req: Request, res: Response) => {
+routes.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
 });
 
