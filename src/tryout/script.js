@@ -1,21 +1,24 @@
-document.getElementById("jokeBtn").onclick = function () {
-	fetchJoke("https://dad.croissant.one/api/joke", "joke");
-};
+function userRequest(type) {
+	const userMessage = type === 'joke' ? "Tell me a joke" : "Tell me a pickup line";
+	addMessage(userMessage, 'user');
+	fetchContent(type);
+}
 
-document.getElementById("pickupBtn").onclick = function () {
-	fetchJoke("https://dad.croissant.one/api/pickup", "pickup");
-};
-
-function fetchJoke(url, elementId) {
+function fetchContent(type) {
+	const url = `https://dad.croissant.one/api/${type}`;
 	fetch(url)
-		.then((response) => response.json())
-		.then((data) => {
-			const elem = document.getElementById(elementId);
-			elem.style.opacity = "0";
-			setTimeout(() => {
-				elem.textContent = data[elementId][0].content;
-				elem.style.opacity = "1";
-			}, 300); // Wait for the fade out to finish before changing the text and fading back in
-		})
-		.catch((error) => console.error("Error:", error));
+			.then(response => response.json())
+			.then(data => {
+					addMessage(data[type][0].content, 'dad');
+			})
+			.catch(error => console.error('Error:', error));
+}
+
+function addMessage(text, className) {
+	const chat = document.getElementById('chat');
+	const messageElem = document.createElement('div');
+	messageElem.classList.add('message', className);
+	messageElem.innerText = text;
+	chat.appendChild(messageElem);
+	chat.scrollTop = chat.scrollHeight; // Scroll to bottom
 }
