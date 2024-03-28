@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat with Dad: Full Page</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
     <div class="chat-interface" id="chat"></div>
     <div class="action-bar">
-        <div class="pill" onclick="userRequest('joke')">Joke</div>
-        <div class="pill" onclick="userRequest('pickup')">Pickup</div>
+      <div class="pill" id="joke-pill">Tell me a Joke</div>
+      <div class="pill" id="pickup-pill">Tell me a Pickup Line</div>
+      <div class="pill" id="how-are-you-pill">How are you doing?</div>
     </div>
 
-    <script src="/script.js"></script>
-</body>
+    <script src="/script.js" defer></script>
+  </body>
 </html>
