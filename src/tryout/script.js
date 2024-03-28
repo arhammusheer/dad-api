@@ -1,4 +1,7 @@
 function userRequest(type) {
+  // Remove hero if it exists
+  removeHero();
+
   addMessage(type, "user");
   addTypingToChat();
   fetchContent(type)
@@ -15,6 +18,8 @@ function userRequest(type) {
 }
 
 function localRequest(type) {
+  // Remove hero if it exists
+  removeHero();
   switch (type) {
     case "how-are-you":
       addMessage("How are you?", "user");
@@ -75,6 +80,11 @@ function addEmoji(emoji, className) {
   emojiElem.innerText = emoji;
   chat.appendChild(emojiElem);
   chat.scrollTop = chat.scrollHeight; // Scroll to bottom
+}
+
+function removeHero() {
+  const hero = document.getElementById("hero");
+  if (hero) hero.remove();
 }
 
 // Pill Listeners

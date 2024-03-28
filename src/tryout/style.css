@@ -73,3 +73,20 @@ html {
   color: #808183;
   margin-left: 10px;
 }
+.welcome-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.welcome-hero h1 {
+  font-size: 40px;
+  color: #007bff;
+}
+.welcome-hero p {
+  font-size: 20px;
+  color: #808183;
+}
