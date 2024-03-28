@@ -18,10 +18,15 @@ function localRequest(type) {
   switch (type) {
     case "how-are-you":
       addMessage("How are you?", "user");
-      addEmoji("👍", "dad");
+      addTypingToChat();
+      setTimeout(() => {
+        addEmoji("👍", "dad");
+        removeTypingFromChat();
+      }, 1000);
       break;
     default:
       addMessage("I'm sorry, I don't understand", "dad");
+      removeTypingFromChat();
   }
 }
 
