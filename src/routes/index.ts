@@ -11,7 +11,7 @@ import router from "./api.routes";
 const routes = Router();
 
 const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
+  windowMs: 3000, // 3 seconds
   max: 5, // limit each IP to 10 requests per windowMs
 });
 
