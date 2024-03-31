@@ -8,7 +8,7 @@ const express_rate_limit_1 = require("express-rate-limit");
 const api_routes_1 = __importDefault(require("./api.routes"));
 const routes = (0, express_1.Router)();
 const limiter = (0, express_rate_limit_1.rateLimit)({
-    windowMs: 60 * 1000,
+    windowMs: 3000,
     max: 5, // limit each IP to 10 requests per windowMs
 });
 routes.use(limiter);
